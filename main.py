@@ -1,8 +1,9 @@
 import math
 import pygame
 
-WIDTH = 800
-HEIGHT = 500
+WIDTH = 810
+HEIGHT = 505
+PAD = 5
 
 BLACK = (0, 0, 0)
 
@@ -28,7 +29,7 @@ while running:
 
     screen.fill((255, 255, 255))
 
-    draw_grid(screen, 0, 100, WIDTH, HEIGHT, 40, 20)
+    draw_grid(screen, PAD, 100, WIDTH - PAD, HEIGHT - PAD, 40, 20)
 
     pygame.display.flip()
 
