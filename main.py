@@ -1,8 +1,24 @@
+import math
 import pygame
+
+WIDTH = 800
+HEIGHT = 500
+
+BLACK = (0, 0, 0)
+
+def draw_grid(screen, x_start, y_start, x_end, y_end, x_tiles, y_tiles):
+    width = x_end - x_start
+    height = y_end - y_start
+    tile_width = math.floor(width / x_tiles)
+    tile_height = math.floor(height / y_tiles)
+    for x in range(x_start, x_start + width, tile_width):
+        for y in range(y_start, y_start + height, tile_height):
+            rect = pygame.Rect(x, y, tile_width, tile_height)
+            pygame.draw.rect(screen, BLACK, rect, 1)
 
 pygame.init()
 
-screen = pygame.display.set_mode([500, 500])
+screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
 running = True
 while running:
@@ -12,7 +28,7 @@ while running:
 
     screen.fill((255, 255, 255))
 
-    pygame.draw.circle(screen, (0, 0, 0), (250, 250), 100)
+    draw_grid(screen, 0, 100, WIDTH, HEIGHT, 40, 20)
 
     pygame.display.flip()
 
