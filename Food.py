@@ -9,24 +9,18 @@ class Food:
     def __init__(self, grid_size, snake):
         self.is_eaten = False
         self.grid_size = grid_size
-        x = -1
-        while x == -1:  # TODO: Build better way of selecting grid spot in case there are none left / more efficient
+
+        x, y = -1, -1
+        while x == -1 or y == -1:  # TODO: needs to check if empty blocks exist
             x = randint(0, self.grid_size[0] - 1)
-            for i in range(snake.get_size() - 1):
-                if x == snake.get_block(i).get_pos()[0]:
-                    x = -1
-                    continue
-                else:
-                    self.x = x
-        y = -1
-        while y == -1:
             y = randint(0, self.grid_size[1] - 1)
-            for i in range(snake.get_size() - 1):
-                if y == snake.get_block(i).get_pos()[1]:
-                    y = -1
-                    continue
-                else:
-                    self.y = y
+            for i in range(snake.get_size()):
+                block_x, block_y = snake.get_block(i).get_pos()
+                if x == block_x and y == block_y:
+                    x, y = -1, -1
+                    break
+        self.x = x
+        self.y = y
 
     def get_pos(self):
         return self.x, self.y

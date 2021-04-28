@@ -52,6 +52,11 @@ while running:
             food.eat()
             snake.grow()
             food = Food(grid.get_size(), snake)
+        for i in range(1, snake.get_size()):
+            head_x, head_y = snake.get_block(0).get_pos()
+            if snake.get_block(i).intersects(head_x, head_y):
+                state = GameState.FINISHED
+                break
         last_tick = math.floor(time.time() * 1000)
     elif state == GameState.PAUSED:
         last_tick = math.floor(time.time() * 1000)
