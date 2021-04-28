@@ -16,6 +16,14 @@ class Snake:
         for _ in range(2):
             self.grow()
 
+    def get_size(self):
+        return len(self.blocks)
+
+    def get_block(self, index):
+        if index > len(self.blocks) - 1 or index < 0:
+            return False
+        return self.blocks[index]
+
     def grow(self):
         last_block = self.blocks[len(self.blocks) - 1]
         self.blocks.append(GameObject(last_block.x, last_block.y, BODY_COLOR, self.grid_size))

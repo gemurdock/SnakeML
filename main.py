@@ -3,6 +3,7 @@ import time
 import pygame
 from Grid import Grid
 from Snake import Snake
+from Food import Food
 from lib.GameState import GameState
 from lib.Direction import Direction
 
@@ -21,6 +22,7 @@ state = GameState.RUNNING
 last_tick = math.floor(time.time() * 1000)
 grid = Grid(0, 100, WIDTH, HEIGHT - 100, 15, 15, 0, 5)
 snake = Snake(grid.get_size())
+food = Food(grid.get_size(), snake)
 player_direction = Direction.RIGHT
 
 print("Grid size: %s" % (grid.get_size(),))
@@ -46,6 +48,10 @@ while running:
         if not is_on_map:
             state = GameState.FINISHED
             print('Game over')
+        if snake.get_block(0).intersects(food.get_pos()[0], food.get_pos()[1]):
+            food.eat()
+            snake.grow()
+            food = Food(grid.get_size(), snake)
         last_tick = math.floor(time.time() * 1000)
     elif state == GameState.PAUSED:
         last_tick = math.floor(time.time() * 1000)
@@ -54,6 +60,7 @@ while running:
 
     grid.draw(screen)
     snake.draw(screen, grid)
+    food.draw(screen, grid)
 
     pygame.display.flip()
 

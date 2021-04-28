@@ -49,6 +49,9 @@ class GameObject:
         else:
             return False
 
+    def intersects(self, x, y):
+        return self.x == x and self.y == y
+
     def move(self, direction):
         self.last_x = self.x
         self.last_y = self.y
