@@ -19,7 +19,7 @@ class Grid:
                 self.grid[i].append(Block(block_x, block_y, block_x + square_width, block_y + square_height, (0, 0, 0)))
 
     def get_size(self):
-        return len(self.grid), len(self.grid[0])
+        return len(self.grid[0]), len(self.grid)
 
     def get_block(self, x, y):
         if x < 0 or y < 0 or x >= len(self.grid[0]) or y >= len(self.grid):
