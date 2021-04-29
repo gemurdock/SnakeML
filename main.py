@@ -16,6 +16,9 @@ BLACK = (0, 0, 0)
 pygame.init()
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
+font = pygame.font.SysFont("Comic Sans MS", 30)
+text = font.render('%d points' % 0, True, (0, 0, 0))
+print(type(text))
 
 # -- Game Vars --
 state = GameState.RUNNING
@@ -23,6 +26,7 @@ last_tick = math.floor(time.time() * 1000)
 grid = Grid(0, 100, WIDTH, HEIGHT - 100, 15, 15, 0, 5)
 snake = Snake(grid.get_size())
 food = Food(grid.get_size(), snake)
+player_points = 0
 player_direction = Direction.RIGHT
 
 print("Grid size: %s" % (grid.get_size(),))
@@ -50,6 +54,8 @@ while running:
             print('Game over')
         if snake.get_block(0).intersects(food.get_pos()[0], food.get_pos()[1]):
             food.eat()
+            player_points += 1
+            text = font.render('%d points' % player_points, True, (0, 0, 0))
             snake.grow()
             food = Food(grid.get_size(), snake)
         for i in range(1, snake.get_size()):
@@ -66,6 +72,7 @@ while running:
     grid.draw(screen)
     snake.draw(screen, grid)
     food.draw(screen, grid)
+    screen.blit(text, (WIDTH / 2 - (text.get_size()[0] / 2), 0))
 
     pygame.display.flip()
 
