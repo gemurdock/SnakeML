@@ -18,7 +18,6 @@ pygame.init()
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 font = pygame.font.SysFont("Comic Sans MS", 30)
 text = font.render('%d points' % 0, True, BLACK)
-print(type(text))
 
 # -- Game Vars --
 state = GameState.RUNNING
