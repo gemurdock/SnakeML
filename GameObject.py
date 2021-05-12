@@ -1,3 +1,5 @@
+import math
+
 import pygame
 from lib.Direction import Direction
 
@@ -51,6 +53,9 @@ class GameObject:
 
     def intersects(self, x, y):
         return self.x == x and self.y == y
+
+    def dist(self, x, y):
+        return math.dist([self.x, self.y], [x, y])
 
     def move(self, direction):
         self.last_x = self.x
